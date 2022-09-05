@@ -12,7 +12,6 @@ import (
 	"github.com/jerbob92/hoppscotch-backend/models"
 
 	"github.com/graph-gophers/graphql-go"
-        "github.com/ashwanthkumar/slack-go-webhook"
 	"github.com/spf13/viper"
 	"gopkg.in/gomail.v2"
 	"gorm.io/gorm"
@@ -224,18 +223,6 @@ func (b *BaseQuery) CreateTeamInvitation(ctx context.Context, args *CreateTeamIn
 		return nil, err
 	}
         
-        webhookUrl := "https://hooks.slack.com/services/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"
-        payload := slack.Payload {
-          Text: "Test link: " + viper.GetString("frontend_domain") + "/join-team?id=" + invite.Code,
-          Username: "robot",
-          Channel: "#test_channel_priyesh",
-          IconEmoji: ":monkey_face:",
-        }
-        errSlack := slack.Send(webhookUrl, "", payload)
-        if len(errSlack) > 0 {
-          fmt.Printf("error: %s\n", errSlack)
-        }
-
 	name := "A user"
 	if currentUser.DisplayName != "" {
 		name = currentUser.DisplayName
