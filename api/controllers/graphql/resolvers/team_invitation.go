@@ -245,7 +245,7 @@ func (b *BaseQuery) CreateTeamInvitation(ctx context.Context, args *CreateTeamIn
 	m.SetHeader("From", from)
 	m.SetHeader("To", invite.InviteeEmail)
 
-	joinLink := viper.GetString("frontend_domain") + "/join-team?id=" + invite.Code
+	joinLink := viper.GetString("frontend_domain") + "/join-team/?id=" + invite.Code
 
 	templateVariables := struct {
 		InvitingUserName string
